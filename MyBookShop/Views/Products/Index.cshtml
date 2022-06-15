@@ -1,0 +1,35 @@
+﻿@model IEnumerable<MyBookShop.Models.Entities.Book>
+@{
+    Layout = "_Layout";
+}
+<div class="main">
+    <h2>My Book List</h2>
+
+    @foreach (var item in Model)
+    {
+
+        <div class="card mb-3" style="max-width: 440px;">
+            <div class="row g-0">
+                <div class="col-md-4">
+                    <img src="@item.Picture" width="179" height="246" class="img-fluid rounded-start" alt="@item.Title">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title">@Html.DisplayFor(modelItem => item.Title)</h5>
+                        <p class="card-text">ISBN: @Html.DisplayFor(modelItem => item.ISBN)</p>
+                        <p class="card-text">Price: $@Html.DisplayFor(modelItem => item.Price)</p>
+                        
+                            <form asp-controller="Products" asp-action="Buy" asp-route-id="@item.BookId" method="post">
+                               <div class="card-text"> Quantity: <input type="number" value="1" size="2" name="quantity" class="me-2" /> </div>
+                               <div class="card-text">  <button type="submit" class="btn btn-primary">Buy</button> </div>
+                            </form>
+                       
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    }
+</div>
+
+
